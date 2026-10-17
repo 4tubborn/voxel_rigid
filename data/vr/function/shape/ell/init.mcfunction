@@ -100,4 +100,6 @@ execute summon minecraft:block_display run function vr:shape/ell/display_1
 execute summon minecraft:block_display run function vr:shape/ell/display_2
 execute summon minecraft:block_display run function vr:shape/ell/display_3
 function vr:render/body
+execute store result score #elasticity vr.tmp run compute default float vr:e1269 10000
+scoreboard players operation @s vr.e = #elasticity vr.tmp
 return 1

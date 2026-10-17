@@ -1,4 +1,5 @@
 execute unless entity @s[type=minecraft:marker,tag=vr.root] run return 0
+execute if data entity @s data.material_density run return 0
 data modify storage vr:work a set from entity @s data
 scoreboard players operation #a.Ibody.r00 vr.num = @s vr.i00
 scoreboard players operation #a.Ibody.r01 vr.num = @s vr.i01

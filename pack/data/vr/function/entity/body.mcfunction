@@ -1,0 +1,79 @@
+execute unless score @s vr.ec matches 1 run return 0
+data modify storage vr:work a set from entity @s data
+scoreboard players operation #a.Ibody.r00 vr.num = @s vr.i00
+scoreboard players operation #a.Ibody.r01 vr.num = @s vr.i01
+scoreboard players operation #a.Ibody.r02 vr.num = @s vr.i02
+scoreboard players operation #a.Ibody.r10 vr.num = @s vr.i10
+scoreboard players operation #a.Ibody.r11 vr.num = @s vr.i11
+scoreboard players operation #a.Ibody.r12 vr.num = @s vr.i12
+scoreboard players operation #a.Ibody.r20 vr.num = @s vr.i20
+scoreboard players operation #a.Ibody.r21 vr.num = @s vr.i21
+scoreboard players operation #a.Ibody.r22 vr.num = @s vr.i22
+scoreboard players operation #a.J.r00 vr.num = @s vr.j00
+scoreboard players operation #a.J.r01 vr.num = @s vr.j01
+scoreboard players operation #a.J.r02 vr.num = @s vr.j02
+scoreboard players operation #a.J.r10 vr.num = @s vr.j10
+scoreboard players operation #a.J.r11 vr.num = @s vr.j11
+scoreboard players operation #a.J.r12 vr.num = @s vr.j12
+scoreboard players operation #a.J.r20 vr.num = @s vr.j20
+scoreboard players operation #a.J.r21 vr.num = @s vr.j21
+scoreboard players operation #a.J.r22 vr.num = @s vr.j22
+scoreboard players operation #a.K.r00 vr.num = @s vr.k00
+scoreboard players operation #a.K.r01 vr.num = @s vr.k01
+scoreboard players operation #a.K.r02 vr.num = @s vr.k02
+scoreboard players operation #a.K.r10 vr.num = @s vr.k10
+scoreboard players operation #a.K.r11 vr.num = @s vr.k11
+scoreboard players operation #a.K.r12 vr.num = @s vr.k12
+scoreboard players operation #a.K.r20 vr.num = @s vr.k20
+scoreboard players operation #a.K.r21 vr.num = @s vr.k21
+scoreboard players operation #a.K.r22 vr.num = @s vr.k22
+scoreboard players operation #a.R.r00 vr.num = @s vr.r00
+scoreboard players operation #a.R.r01 vr.num = @s vr.r01
+scoreboard players operation #a.R.r02 vr.num = @s vr.r02
+scoreboard players operation #a.R.r10 vr.num = @s vr.r10
+scoreboard players operation #a.R.r11 vr.num = @s vr.r11
+scoreboard players operation #a.R.r12 vr.num = @s vr.r12
+scoreboard players operation #a.R.r20 vr.num = @s vr.r20
+scoreboard players operation #a.R.r21 vr.num = @s vr.r21
+scoreboard players operation #a.R.r22 vr.num = @s vr.r22
+scoreboard players operation #a.count vr.num = @s vr.count
+scoreboard players operation #a.density vr.num = @s vr.den
+scoreboard players operation #a.e vr.num = @s vr.e
+scoreboard players operation #a.inv_mass vr.num = @s vr.im
+scoreboard players operation #a.mass vr.num = @s vr.mass
+scoreboard players operation #a.mu vr.num = @s vr.mu
+scoreboard players operation #a.o.x vr.num = @s vr.ox
+scoreboard players operation #a.o.y vr.num = @s vr.oy
+scoreboard players operation #a.o.z vr.num = @s vr.oz
+scoreboard players operation #a.p.x vr.num = @s vr.px
+scoreboard players operation #a.p.y vr.num = @s vr.py
+scoreboard players operation #a.p.z vr.num = @s vr.pz
+scoreboard players operation #a.previous.o.x vr.num = @s vr.oldox
+scoreboard players operation #a.previous.o.y vr.num = @s vr.oldoy
+scoreboard players operation #a.previous.o.z vr.num = @s vr.oldoz
+scoreboard players operation #a.previous.p.x vr.num = @s vr.oldpx
+scoreboard players operation #a.previous.p.y vr.num = @s vr.oldpy
+scoreboard players operation #a.previous.p.z vr.num = @s vr.oldpz
+scoreboard players operation #a.previous.q.w vr.num = @s vr.oldqw
+scoreboard players operation #a.previous.q.x vr.num = @s vr.oldqx
+scoreboard players operation #a.previous.q.y vr.num = @s vr.oldqy
+scoreboard players operation #a.previous.q.z vr.num = @s vr.oldqz
+scoreboard players operation #a.q.w vr.num = @s vr.qw
+scoreboard players operation #a.q.x vr.num = @s vr.qx
+scoreboard players operation #a.q.y vr.num = @s vr.qy
+scoreboard players operation #a.q.z vr.num = @s vr.qz
+scoreboard players operation #a.radius vr.num = @s vr.rad
+scoreboard players operation #a.v.x vr.num = @s vr.vx
+scoreboard players operation #a.v.y vr.num = @s vr.vy
+scoreboard players operation #a.v.z vr.num = @s vr.vz
+scoreboard players operation #a.w.x vr.num = @s vr.wx
+scoreboard players operation #a.w.y vr.num = @s vr.wy
+scoreboard players operation #a.w.z vr.num = @s vr.wz
+function vr:math/matrix
+tag @e[tag=vr.entity_candidate] remove vr.entity_candidate
+execute store result score #entity.radius vr.num run compute default float {"type":"minecraft:round","input":{"type":"minecraft:mul","inputs":[10000.0,"vr:e1228"]}}
+execute store result storage vr:work entity.limit int 1 run scoreboard players get #entity_limit vr.cfg
+execute store result storage vr:work entity.radius float 0.0001 run scoreboard players get #entity.radius vr.num
+function vr:entity/select with storage vr:work entity
+execute as @e[tag=vr.entity_candidate] at @s run function vr:entity/target
+tag @e[tag=vr.entity_candidate] remove vr.entity_candidate

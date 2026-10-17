@@ -72,6 +72,7 @@ scoreboard players operation #support_b.z vr.num = #support.z vr.num
 execute store result score #c.point.x vr.num run compute default float {"type":"minecraft:round","input":{"type":"minecraft:mul","inputs":[10000.0,"vr:e1147"]}}
 execute store result score #c.point.y vr.num run compute default float {"type":"minecraft:round","input":{"type":"minecraft:mul","inputs":[10000.0,"vr:e1148"]}}
 execute store result score #c.point.z vr.num run compute default float {"type":"minecraft:round","input":{"type":"minecraft:mul","inputs":[10000.0,"vr:e1149"]}}
+function vr:audio/world
 execute store result storage vr:work c.depth float 0.0001 run scoreboard players get #c.depth vr.num
 execute store result storage vr:work c.n.x float 0.0001 run scoreboard players get #c.n.x vr.num
 execute store result storage vr:work c.n.y float 0.0001 run scoreboard players get #c.n.y vr.num

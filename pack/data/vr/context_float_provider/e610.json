@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:abs",
+  "input": {
+    "type": "minecraft:mul",
+    "inputs": [
+      0.0001,
+      {
+        "type": "minecraft:from_int",
+        "input": {
+          "type": "minecraft:score",
+          "target": {
+            "type": "minecraft:fixed",
+            "name": "#sweep.speed"
+          },
+          "score": "vr.num",
+          "fallback": 0
+        }
+      }
+    ]
+  }
+}

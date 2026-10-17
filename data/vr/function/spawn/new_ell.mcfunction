@@ -1,2 +1,4 @@
 tag @s add vr.root
-return run function vr:shape/ell/init
+function vr:shape/ell/init
+function vr:spawn/material_ell
+return 1

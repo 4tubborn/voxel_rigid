@@ -1,0 +1,1 @@
+tellraw @s [{text:"Loaded="},{score:{name:"#loaded",objective:"vr.stat"}},{text:" actively processed this tick="},{score:{name:"#processed",objective:"vr.stat"}},{text:" round="},{score:{name:"#round",objective:"vr.cfg"}}]

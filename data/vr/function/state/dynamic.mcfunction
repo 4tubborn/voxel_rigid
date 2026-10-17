@@ -14,6 +14,7 @@ execute if data storage vr:config water_velocity run execute store result score 
 execute if data storage vr:config water_velocity run execute store result score #flow.y vr.num run data get storage vr:work flow.y 10000
 execute if data storage vr:config water_velocity run execute store result score #flow.z vr.num run data get storage vr:work flow.z 10000
 function vr:dispatch/fluid with storage vr:work a
+function vr:audio/water
 function vr:math/inertia
 execute store result score #a.v.x vr.num run compute default float {"type":"minecraft:round","input":{"type":"minecraft:mul","inputs":[10000.0,"vr:e171"]}}
 execute store result score #a.v.y vr.num run compute default float {"type":"minecraft:round","input":{"type":"minecraft:mul","inputs":[10000.0,"vr:e172"]}}
@@ -21,6 +22,7 @@ execute store result score #a.v.z vr.num run compute default float {"type":"mine
 execute store result score #a.w.x vr.num run compute default float {"type":"minecraft:round","input":{"type":"minecraft:mul","inputs":[10000.0,"vr:e174"]}}
 execute store result score #a.w.y vr.num run compute default float {"type":"minecraft:round","input":{"type":"minecraft:mul","inputs":[10000.0,"vr:e175"]}}
 execute store result score #a.w.z vr.num run compute default float {"type":"minecraft:round","input":{"type":"minecraft:mul","inputs":[10000.0,"vr:e176"]}}
+execute unless function vr:body/check_work_speed run return 0
 execute store result score #speed vr.num run compute default float {"type":"minecraft:round","input":{"type":"minecraft:mul","inputs":[10000.0,"vr:e177"]}}
 execute store result score #spin vr.num run compute default float {"type":"minecraft:round","input":{"type":"minecraft:mul","inputs":[10000.0,"vr:e178"]}}
 execute store result score #vs vr.num run compute default float {"type":"minecraft:round","input":{"type":"minecraft:mul","inputs":[10000.0,"vr:e179"]}}

@@ -120,6 +120,11 @@ scoreboard players get @e[type=minecraft:marker,tag=vr.root,sort=nearest,limit=1
 
 `vr.mass` 的记分值为质量×10000；默认质量来自 shapes.json 的 density×体素数。位置偏移、速度、角速度、四元数和矩阵也使用×10000 的记分项，整数原点 vr.ox/oy/oz 与体素数 vr.count 不缩放。实体 data 只含 shape/state。
 
+## 修改最近结构的恢复系数，范围 0..1
+
+```mcfunction
+execute as @e[type=minecraft:marker,tag=vr.root,sort=nearest,limit=1] run function vr:api/set_elasticity {elasticity:0.9}
+```
 
 ## Stopwatch 与查询模式
 
@@ -135,15 +140,16 @@ mode=1 为线性，mode=0 为 BVH。测量使用 stopwatch，时间保存为按�
 
 ## 0.2.2 修复
 
-修复改为记分板后世界/流体宏参数未同步的问题。无需清空存档或所有结构；替换旧包并 reload，新参数会覆盖残留数据。新增 `/function vr:test/macro_bridge` 与静态宏边界检查。根因、清空参数的对照测试、验证及更新方式见 `docs/fix_0.2.2.md`。
+修复改为记分板后世界/流体宏参数未同步的问题。无需清空存档或所有结构；替换旧包并 reload，新参数会覆盖残留数据。新增 `function vr:test/macro_bridge` 与静态宏边界检查。根因、清空参数的对照测试、验证及更新方式见 `docs/fix_0.2.2.md`。
 
 ## 0.3.1 冲量工具
 
-`/function vr:input/give_tool` 获取专用木棍。仅主手持工具时创建玩家交互盒，切换物品后清除；攻击进度触发旋转体素求交和偏心冲量。射程 3 格。
+`function vr:input/give_tool` 获取专用木棍。仅主手持工具时创建玩家交互盒，切换物品后清除；攻击进度触发旋转体素求交和偏心冲量。射程 3 格。
 
-`/scoreboard players set #strength vr.input 2000` 表示冲量 0.2（数值×10000）。
+`scoreboard players set #strength vr.input 2000` 表示冲量 0.2（数值×10000）。
 
-安装兼容所附文档接口的 Bookshelf view/raycast/hitbox 及其依赖后，执行 `/scoreboard players set #bookshelf vr.input 1`，启用精确方块碰撞形状遮挡。默认 0 使用内置完整方块近似。详见 `docs/attack_input_0.3.1.md`。
+安装兼容所附文档接口的 Bookshelf view/raycast/hitbox 及其依赖后，执行 `scoreboard players set #bookshelf vr.input 1`，启用精确方块碰撞形状遮挡。默认 0 使用内置完整方块近似。详见 `docs/attack_input_0.3.1.md`。
+
 ## 从原生方块生成结构
 
 ```mcfunction

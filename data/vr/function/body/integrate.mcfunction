@@ -1,4 +1,7 @@
 execute if data entity @s data{state:"static"} run return 0
+scoreboard players set #discarded vr.tmp 0
+execute unless function vr:body/check_limits run return 0
+tag @s remove vr.impact_sound
 tag @s remove vr.frozen
 data modify storage vr:work a set from entity @s data
 scoreboard players operation #a.J.r00 vr.num = @s vr.j00
@@ -40,6 +43,7 @@ scoreboard players operation #a.previous.q.x vr.num = #a.q.x vr.num
 scoreboard players operation #a.previous.q.y vr.num = #a.q.y vr.num
 scoreboard players operation #a.previous.q.z vr.num = #a.q.z vr.num
 function vr:dispatch/state with storage vr:work a
+execute if score #discarded vr.tmp matches 1 run return 0
 scoreboard players operation @s vr.j00 = #a.J.r00 vr.num
 scoreboard players operation @s vr.j01 = #a.J.r01 vr.num
 scoreboard players operation @s vr.j02 = #a.J.r02 vr.num

@@ -1,6 +1,5 @@
 execute unless loaded ~ ~ ~ run return 0
 execute if block ~ ~ ~ #vr:conversion_disallowed run return 0
-#execute if data block ~ ~ ~ id run return 0
 scoreboard players set #block_read vr.tmp 0
 execute store success score #block_read vr.tmp run function #bs.block:get_block
 execute unless score #block_read vr.tmp matches 1 run return 0
@@ -13,6 +12,7 @@ execute unless score #source_valid vr.tmp matches 1 run return 0
 data modify storage vr:work conversion.display set value {id:"minecraft:air",properties:{}}
 data modify storage vr:work conversion.display.id set from storage bs:out block.type
 execute if data storage bs:out block.properties run data modify storage vr:work conversion.display.properties set from storage bs:out block.properties
+execute unless function vr:spawn/read_material run return 0
 execute unless function vr:spawn/read_collision run return 0
 scoreboard players set #converted vr.tmp 0
 execute positioned ~0.5 ~0.5 ~0.5 summon minecraft:marker run function vr:spawn/converted_root

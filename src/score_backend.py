@@ -128,6 +128,7 @@ def bridge(line):
 def io_fields(path,mode):
  name=path.relative_to(F).as_posix()
  motion=lambda f:f.startswith(('o.','p.','v.','w.','q.'))
+ if name=='body/check_limits.mcfunction':return {f for f in bodyfields if f.startswith(('o.','p.','v.'))}
  if name=='render/body.mcfunction':return {f for f in bodyfields if f.startswith(('o.','p.','q.'))}
  if name.endswith('/init.mcfunction') and name.startswith('shape/'):
   return {f for f in bodyfields if f.startswith(('o.','p.','q.'))} if mode=='read' else {f for f in bodyfields if f.startswith(('o.','p.'))}
@@ -157,7 +158,7 @@ for p,lines0 in texts.items():
    # Shape and static/dynamic flags are stable metadata and not rewritten each update.
    continue
   m=re.fullmatch(r'data modify entity @s data set value (.*)',line)
-  if m and '/shape/' in str(p):
+  if m and p.relative_to(F).as_posix().startswith('shape/'):
    v=parse_snbt(m[1]);out += [f'data modify entity @s data set value {{shape:"{v["shape"]}",state:"{v["state"]}"}}']
    for field,objective in obj.items():out.append(f'scoreboard players set @s {objective} {round((get(v,field) or 0)*scale("a."+field))}')
    continue

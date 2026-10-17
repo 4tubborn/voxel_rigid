@@ -1,0 +1,62 @@
+{
+  "type": "minecraft:sub",
+  "left": {
+    "type": "minecraft:mul",
+    "inputs": [
+      0.0001,
+      {
+        "type": "minecraft:from_int",
+        "input": {
+          "type": "minecraft:score",
+          "target": {
+            "type": "minecraft:fixed",
+            "name": "#rel.z"
+          },
+          "score": "vr.num",
+          "fallback": 0
+        }
+      }
+    ]
+  },
+  "right": {
+    "type": "minecraft:mul",
+    "inputs": [
+      {
+        "type": "minecraft:mul",
+        "inputs": [
+          0.0001,
+          {
+            "type": "minecraft:from_int",
+            "input": {
+              "type": "minecraft:score",
+              "target": {
+                "type": "minecraft:fixed",
+                "name": "#vn"
+              },
+              "score": "vr.num",
+              "fallback": 0
+            }
+          }
+        ]
+      },
+      {
+        "type": "minecraft:mul",
+        "inputs": [
+          0.0001,
+          {
+            "type": "minecraft:from_int",
+            "input": {
+              "type": "minecraft:score",
+              "target": {
+                "type": "minecraft:fixed",
+                "name": "#c.n.z"
+              },
+              "score": "vr.num",
+              "fallback": 0
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

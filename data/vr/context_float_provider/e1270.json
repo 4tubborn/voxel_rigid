@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:min",
+  "inputs": [
+    1.0,
+    {
+      "type": "minecraft:max",
+      "inputs": [
+        0.0,
+        {
+          "type": "minecraft:storage",
+          "storage": "vr:config",
+          "path": "materials.elasticity",
+          "fallback": 0.0
+        }
+      ]
+    }
+  ]
+}

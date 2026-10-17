@@ -1,0 +1,6 @@
+{
+  "type": "minecraft:storage",
+  "storage": "vr:config",
+  "path": "audio.min_speed",
+  "fallback": 0.0
+}

@@ -1,5 +1,6 @@
 tag @s add vr.root
 function vr:shape/cube/init
+function vr:spawn/apply_material
 data modify entity @s data.shape set value "custom"
 data modify entity @s data.boxes set from storage vr:work conversion.boxes
 execute store result score @s vr.rad run scoreboard players get #geometry.radius vr.num

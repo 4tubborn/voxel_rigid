@@ -1,3 +1,4 @@
+execute unless function vr:body/check_limits run return 0
 execute store result storage vr:work tp.x float 0.0001 run scoreboard players get #a.p.x vr.num
 execute store result storage vr:work tp.y float 0.0001 run scoreboard players get #a.p.y vr.num
 execute store result storage vr:work tp.z float 0.0001 run scoreboard players get #a.p.z vr.num

@@ -10,5 +10,8 @@ kill @e[type=minecraft:marker,tag=vr.input_probe]
 execute if score #ray_found vr.tmp matches 0 run return 0
 scoreboard players set #ray_steps vr.tmp 0
 execute unless score #bookshelf vr.input matches 1 if function vr:input/occlusion run return run function vr:input/blocked
+data remove storage vr:work input_sound
+data modify storage vr:work input_sound.sound set from entity @e[type=minecraft:marker,tag=vr.input_hit,limit=1] data.sounds.hit
+execute if data storage vr:work input_sound.sound at @s run function vr:input/hit_sound with storage vr:work input_sound
 execute as @e[type=minecraft:marker,tag=vr.input_hit,limit=1] run function vr:input/apply
 tag @e[type=minecraft:marker,tag=vr.input_hit] remove vr.input_hit

@@ -97,4 +97,6 @@ scoreboard players operation @s vr.pz = #a.p.z vr.num
 execute store result storage vr:work owner.id int 1 run scoreboard players get @s vr.id
 execute summon minecraft:block_display run function vr:shape/cube/display_0
 function vr:render/body
+execute store result score #elasticity vr.tmp run compute default float vr:e1267 10000
+scoreboard players operation @s vr.e = #elasticity vr.tmp
 return 1

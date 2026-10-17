@@ -1,0 +1,64 @@
+{
+  "type": "minecraft:add",
+  "inputs": [
+    {
+      "type": "minecraft:mul",
+      "inputs": [
+        0.0001,
+        {
+          "type": "minecraft:from_int",
+          "input": {
+            "type": "minecraft:score",
+            "target": {
+              "type": "minecraft:fixed",
+              "name": "#entity.feet.x"
+            },
+            "score": "vr.num",
+            "fallback": 0
+          }
+        }
+      ]
+    },
+    {
+      "type": "minecraft:mul",
+      "inputs": [
+        {
+          "type": "minecraft:mul",
+          "inputs": [
+            0.0001,
+            {
+              "type": "minecraft:from_int",
+              "input": {
+                "type": "minecraft:score",
+                "target": {
+                  "type": "minecraft:fixed",
+                  "name": "#entity.push.x"
+                },
+                "score": "vr.num",
+                "fallback": 0
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:mul",
+          "inputs": [
+            0.0001,
+            {
+              "type": "minecraft:from_int",
+              "input": {
+                "type": "minecraft:score",
+                "target": {
+                  "type": "minecraft:fixed",
+                  "name": "#entity.push_scale"
+                },
+                "score": "vr.num",
+                "fallback": 0
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -285,6 +285,7 @@ exec((ROOT/'src/bookshelf_world.py').read_text(), globals())
 exec((ROOT/'src/convert_block.py').read_text(), globals())
 exec((ROOT/'src/dynamic_shapes.py').read_text(), globals())
 exec((ROOT/'src/entity_collision.py').read_text(), globals())
+exec((ROOT/'src/material_management.py').read_text(), globals())
 exec((ROOT/'src/score_backend.py').read_text(), globals())
 with (F/'load.mcfunction').open('a') as out:
  out.write('scoreboard objectives add vr.updates dummy\nscoreboard objectives add vr.prof dummy\nexecute unless score #query_mode vr.cfg matches 0..1 run scoreboard players set #query_mode vr.cfg 1\n')
