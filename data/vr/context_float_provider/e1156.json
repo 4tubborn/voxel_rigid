@@ -1,0 +1,146 @@
+{
+  "type": "minecraft:max",
+  "inputs": [
+    {
+      "type": "minecraft:mul",
+      "inputs": [
+        0.0001,
+        {
+          "type": "minecraft:from_int",
+          "input": {
+            "type": "minecraft:score",
+            "target": {
+              "type": "minecraft:fixed",
+              "name": "#geometry.radius"
+            },
+            "score": "vr.num",
+            "fallback": 0
+          }
+        }
+      ]
+    },
+    {
+      "type": "minecraft:add",
+      "inputs": [
+        {
+          "type": "minecraft:length",
+          "inputs": [
+            {
+              "type": "minecraft:mul",
+              "inputs": [
+                0.0001,
+                {
+                  "type": "minecraft:from_int",
+                  "input": {
+                    "type": "minecraft:score",
+                    "target": {
+                      "type": "minecraft:fixed",
+                      "name": "#geometry.c.x"
+                    },
+                    "score": "vr.num",
+                    "fallback": 0
+                  }
+                }
+              ]
+            },
+            {
+              "type": "minecraft:mul",
+              "inputs": [
+                0.0001,
+                {
+                  "type": "minecraft:from_int",
+                  "input": {
+                    "type": "minecraft:score",
+                    "target": {
+                      "type": "minecraft:fixed",
+                      "name": "#geometry.c.y"
+                    },
+                    "score": "vr.num",
+                    "fallback": 0
+                  }
+                }
+              ]
+            },
+            {
+              "type": "minecraft:mul",
+              "inputs": [
+                0.0001,
+                {
+                  "type": "minecraft:from_int",
+                  "input": {
+                    "type": "minecraft:score",
+                    "target": {
+                      "type": "minecraft:fixed",
+                      "name": "#geometry.c.z"
+                    },
+                    "score": "vr.num",
+                    "fallback": 0
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "minecraft:length",
+          "inputs": [
+            {
+              "type": "minecraft:mul",
+              "inputs": [
+                0.0001,
+                {
+                  "type": "minecraft:from_int",
+                  "input": {
+                    "type": "minecraft:score",
+                    "target": {
+                      "type": "minecraft:fixed",
+                      "name": "#geometry.h.x"
+                    },
+                    "score": "vr.num",
+                    "fallback": 0
+                  }
+                }
+              ]
+            },
+            {
+              "type": "minecraft:mul",
+              "inputs": [
+                0.0001,
+                {
+                  "type": "minecraft:from_int",
+                  "input": {
+                    "type": "minecraft:score",
+                    "target": {
+                      "type": "minecraft:fixed",
+                      "name": "#geometry.h.y"
+                    },
+                    "score": "vr.num",
+                    "fallback": 0
+                  }
+                }
+              ]
+            },
+            {
+              "type": "minecraft:mul",
+              "inputs": [
+                0.0001,
+                {
+                  "type": "minecraft:from_int",
+                  "input": {
+                    "type": "minecraft:score",
+                    "target": {
+                      "type": "minecraft:fixed",
+                      "name": "#geometry.h.z"
+                    },
+                    "score": "vr.num",
+                    "fallback": 0
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

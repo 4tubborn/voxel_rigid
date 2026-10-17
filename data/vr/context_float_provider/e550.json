@@ -1,0 +1,41 @@
+{
+  "type": "minecraft:add",
+  "inputs": [
+    {
+      "type": "minecraft:mul",
+      "inputs": [
+        0.0001,
+        {
+          "type": "minecraft:from_int",
+          "input": {
+            "type": "minecraft:score",
+            "target": {
+              "type": "minecraft:fixed",
+              "name": "#force.x"
+            },
+            "score": "vr.num",
+            "fallback": 0
+          }
+        }
+      ]
+    },
+    {
+      "type": "minecraft:mul",
+      "inputs": [
+        0.0001,
+        {
+          "type": "minecraft:from_int",
+          "input": {
+            "type": "minecraft:score",
+            "target": {
+              "type": "minecraft:fixed",
+              "name": "#df.x"
+            },
+            "score": "vr.num",
+            "fallback": 0
+          }
+        }
+      ]
+    }
+  ]
+}

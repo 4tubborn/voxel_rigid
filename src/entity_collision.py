@@ -1,0 +1,36 @@
+"""Configurable one-way entity positional pushing (no fake native rigid-body API)."""
+with (F/'load.mcfunction').open('a') as out:out.write('scoreboard objectives add vr.ec dummy\nexecute unless score #entity_enabled vr.cfg matches 0..1 run scoreboard players set #entity_enabled vr.cfg 0\nexecute unless score #entity_players vr.cfg matches 0..1 run scoreboard players set #entity_players vr.cfg 1\nexecute unless score #entity_tagged vr.cfg matches 0..1 run scoreboard players set #entity_tagged vr.cfg 1\nexecute unless score #entity_limit vr.cfg matches 1..64 run scoreboard players set #entity_limit vr.cfg 16\nexecute unless score #entity_push vr.cfg matches 1..10000 run scoreboard players set #entity_push vr.cfg 2000\n')
+for name in shapes:
+ p=F/f'shape/{name}/init.mcfunction';write(p,'scoreboard players set @s vr.ec 1\n'+p.read_text())
+fn('api/entity_collision','$scoreboard players set #new_entity_enabled vr.cfg $(enabled)','$scoreboard players set #new_entity_players vr.cfg $(players)','$scoreboard players set #new_entity_tagged vr.cfg $(tagged)','$scoreboard players set #new_entity_limit vr.cfg $(max_targets)','$execute store result score #new_entity_push vr.cfg run compute default float {type:"minecraft:round",input:{type:"minecraft:mul",inputs:[10000.0,$(max_push)]}}',[f'execute unless score #new_entity_{k} vr.cfg matches {lo}..{hi} run return 0' for k,lo,hi in [('enabled',0,1),('players',0,1),('tagged',0,1),('limit',1,64),('push',1,10000)]],[f'scoreboard players operation #entity_{k} vr.cfg = #new_entity_{k} vr.cfg' for k in ['enabled','players','tagged','limit','push']],'return 1')
+fn('api/entity_collision_body','$scoreboard players set #ec vr.tmp $(enabled)','execute unless score #ec vr.tmp matches 0..1 run return 0','execute unless entity @s[type=minecraft:marker,tag=vr.root] run return 0','scoreboard players operation @s vr.ec = #ec vr.tmp','return 1')
+# Execute only for actively scheduled roots, once per substep after rigid pairs.
+for name in ['scheduler/substeps','tick/substep_loop']:
+ p=F/(name+'.mcfunction');s=p.read_text();selected=',tag=vr.selected' if name.startswith('scheduler/') else ''
+ line=f'execute if score #entity_enabled vr.cfg matches 1 as @e[type=minecraft:marker,tag=vr.root,tag=!vr.frozen{selected}] at @s run function vr:entity/body\n'
+ s=s.replace('scoreboard players remove #subleft',line+'scoreboard players remove #subleft');write(p,s)
+fn('entity/body','execute unless score @s vr.ec matches 1 run return 0','data modify storage vr:work a set from entity @s data','function vr:math/matrix','tag @e[tag=vr.entity_candidate] remove vr.entity_candidate',calc('entity.radius',add(S('a.radius'),4.0)),'execute store result storage vr:work entity.limit int 1 run scoreboard players get #entity_limit vr.cfg','function vr:entity/select with storage vr:work entity','execute as @e[tag=vr.entity_candidate] at @s run function vr:entity/target','tag @e[tag=vr.entity_candidate] remove vr.entity_candidate')
+fn('entity/select','$execute if score #entity_players vr.cfg matches 1 run tag @a[gamemode=!spectator,distance=..$(radius),limit=$(limit),sort=nearest] add vr.entity_candidate','$execute if score #entity_tagged vr.cfg matches 1 run tag @e[tag=vr.collidable,type=!minecraft:marker,type=!minecraft:block_display,type=!minecraft:item_display,type=!minecraft:text_display,type=!minecraft:interaction,distance=..$(radius),limit=$(limit),sort=nearest] add vr.entity_candidate')
+# Translate scratch marker by A's integer origin before extracting target Pos.
+ls=['execute if entity @s[gamemode=spectator] run return 0','data modify storage bs:out hitbox set value {width:0.0d,height:0.0d,depth:0.0d,scale:1.0d}','function #bs.hitbox:get_entity','data modify storage vr:work entity_box set from storage bs:out hitbox']
+for key in ['width','height','depth','scale']:ls += [f'execute store result storage vr:work entity.{key} float 0.0001 run data get storage vr:work entity_box.{key} 10000']
+ls += [score('entity_width',S('entity.width'),10000),'execute unless score #entity_width vr.tmp matches 1.. run return 0','execute summon minecraft:marker run tag @s add vr.entity_probe']
+for x in AX:ls += [f'scoreboard players operation #negative vr.tmp = #a.o.{x} vr.num','scoreboard players operation #negative vr.tmp *= #minus_one vr.input',f'execute store result storage vr:work entity_offset.{x} int 1 run scoreboard players get #negative vr.tmp']
+ls+=['function vr:entity/translate with storage vr:work entity_offset']
+for i,x in enumerate(AX):ls += [f'execute store result storage vr:work entity.feet.{x} float 0.0001 run data get entity @e[type=minecraft:marker,tag=vr.entity_probe,limit=1] Pos[{i}] 10000']
+ls+=['kill @e[type=minecraft:marker,tag=vr.entity_probe]']
+for x,key in zip(AX,['width','height','depth']):ls += [calc('bh.'+x,mul(.5,S('entity.'+key),S('entity.scale')))]
+ls+=cv('bc',[add(S('entity.feet.'+x),S('bh.y') if x=='y' else 0.0) for x in AX])+[setv('b.R',literal(identity)),setv('entity.push',literal(zero)),'scoreboard players set #entity_contacts vr.tmp 0','function vr:entity/dispatch with storage vr:work a','execute unless score #entity_contacts vr.tmp matches 1.. run return 0',calc('entity.push_length',norm(vec('entity.push'))),calc('entity.push_scale',div(mn(S('entity.push_length'),mul(.0001,{'type':'minecraft:from_int','input':{'type':'minecraft:score','target':{'type':'minecraft:fixed','name':'#entity_push'},'score':'vr.cfg','fallback':2000}})),mx(.0001,S('entity.push_length'))))]
+ls+=cv('entity.destination',[add(S('entity.feet.'+x),mul(S('entity.push.'+x),S('entity.push_scale'))) for x in AX])
+for x in AX:ls += [cp('entity.destination.o'+x,'a.o.'+x)]
+ls+=['function vr:entity/teleport with storage vr:work entity.destination','execute if function #bs.hitbox:is_entity_in_blocks_collision run return run function vr:entity/rollback','scoreboard players add #entity_hits vr.stat 1','return 1']
+fn('entity/target',ls)
+fn('entity/translate','$execute as @e[type=minecraft:marker,tag=vr.entity_probe,limit=1] at @s run tp @s ~$(x) ~$(y) ~$(z)')
+fn('entity/teleport','$execute positioned $(ox).0 $(oy).0 $(oz).0 run tp @s ~$(x) ~$(y) ~$(z)')
+fn('entity/dispatch','$function vr:shape/$(shape)/entities')
+for name,md in meta.items():fn('shape/'+name+'/entities',setv('ah',literal(half)),*[[setv('local',literal(dict(zip(AX,p)))),'function vr:entity/voxel'] for p in md['centers']])
+fn('shape/custom/entities','data modify storage vr:work entity_geometry set from storage vr:work a.boxes','function vr:entity/custom_loop')
+fn('entity/custom_loop','execute unless data storage vr:work entity_geometry[0] run return 0',cp('local','entity_geometry[0].c'),cp('ah','entity_geometry[0].h'),'function vr:entity/voxel','data remove storage vr:work entity_geometry[0]','return run function vr:entity/custom_loop')
+fn('entity/voxel',cv('ac',[add(a,b) for a,b in zip(vec('a.p'),mv(mat('a.R'),vec('local')))]),'execute unless function vr:collision/sat run return 0',cv('entity.push',[sub(v,mul(n,mn(.5,S('best.depth')))) for v,n in zip(vec('entity.push'),vec('best.n'))]),'scoreboard players add #entity_contacts vr.tmp 1')
+
+fn('entity/rollback',*[cp('entity.feet.o'+x,'a.o.'+x) for x in AX],'function vr:entity/teleport with storage vr:work entity.feet','return 0')

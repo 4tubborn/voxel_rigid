@@ -1,0 +1,1 @@
+tellraw @s [{text:"VR SAT="},{score:{name:"#sat",objective:"vr.stat"}},{text:" BVH="},{score:{name:"#bvh",objective:"vr.stat"}},{text:" world="},{score:{name:"#world",objective:"vr.stat"}},{text:" contacts="},{score:{name:"#contacts",objective:"vr.stat"}},{text:" overflow="},{score:{name:"#overflow",objective:"vr.stat"}}]

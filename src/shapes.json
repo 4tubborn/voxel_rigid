@@ -1,0 +1,6 @@
+{
+ "cube":{"voxels":[[0,0,0]],"block":"minecraft:oak_planks","density":0.7},
+ "bar":{"voxels":[[0,0,0],[1,0,0],[2,0,0]],"block":"minecraft:iron_block","density":2.0},
+ "ell":{"voxels":[[0,0,0],[1,0,0],[2,0,0],[0,1,0]],"block":"minecraft:copper_block","density":1.4},
+ "raft":{"voxels":[[0,0,0],[0,0,1],[0,0,2],[1,0,0],[1,0,1],[1,0,2],[2,0,0],[2,0,1],[2,0,2]],"block":"minecraft:oak_planks","density":0.5}
+}

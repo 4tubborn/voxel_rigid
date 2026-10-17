@@ -1,0 +1,14 @@
+[
+  "separated cubes",
+  "overlapping cubes",
+  "penetration 0.25",
+  "rotated overlap",
+  "rotated separation",
+  "swept hit despite clear endpoint",
+  "binary TOI near one third",
+  "elastic A reverses",
+  "elastic B reverses",
+  "centered contact has no spin",
+  "quaternion normalization",
+  "gravity"
+]

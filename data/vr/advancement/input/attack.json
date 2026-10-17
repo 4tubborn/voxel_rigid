@@ -1,0 +1,33 @@
+{
+  "criteria": {
+    "attack": {
+      "trigger": "minecraft:player_hurt_entity",
+      "conditions": {
+        "player": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:equipment": {
+              "mainhand": {
+                "predicates": {
+                  "minecraft:custom_data": "{vr:{impulse_tool:1b}}"
+                }
+              }
+            }
+          }
+        },
+        "entity": {
+          "type": "minecraft:entity_properties",
+          "entity": "this",
+          "predicate": {
+            "minecraft:entity_type": "minecraft:interaction",
+            "minecraft:nbt": "{Tags:[\"vr.attack_input\"]}"
+          }
+        }
+      }
+    }
+  },
+  "rewards": {
+    "function": "vr:input/attack"
+  }
+}

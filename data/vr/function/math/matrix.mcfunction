@@ -1,0 +1,9 @@
+execute store result score #a.R.r00 vr.num run compute default float {"type":"minecraft:round","input":{"type":"minecraft:mul","inputs":[10000.0,"vr:e205"]}}
+execute store result score #a.R.r01 vr.num run compute default float {"type":"minecraft:round","input":{"type":"minecraft:mul","inputs":[10000.0,"vr:e206"]}}
+execute store result score #a.R.r02 vr.num run compute default float {"type":"minecraft:round","input":{"type":"minecraft:mul","inputs":[10000.0,"vr:e207"]}}
+execute store result score #a.R.r10 vr.num run compute default float {"type":"minecraft:round","input":{"type":"minecraft:mul","inputs":[10000.0,"vr:e208"]}}
+execute store result score #a.R.r11 vr.num run compute default float {"type":"minecraft:round","input":{"type":"minecraft:mul","inputs":[10000.0,"vr:e209"]}}
+execute store result score #a.R.r12 vr.num run compute default float {"type":"minecraft:round","input":{"type":"minecraft:mul","inputs":[10000.0,"vr:e210"]}}
+execute store result score #a.R.r20 vr.num run compute default float {"type":"minecraft:round","input":{"type":"minecraft:mul","inputs":[10000.0,"vr:e211"]}}
+execute store result score #a.R.r21 vr.num run compute default float {"type":"minecraft:round","input":{"type":"minecraft:mul","inputs":[10000.0,"vr:e212"]}}
+execute store result score #a.R.r22 vr.num run compute default float {"type":"minecraft:round","input":{"type":"minecraft:mul","inputs":[10000.0,"vr:e213"]}}

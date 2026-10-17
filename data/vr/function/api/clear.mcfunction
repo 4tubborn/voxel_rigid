@@ -1,0 +1,6 @@
+execute in minecraft:overworld run kill @e[type=minecraft:marker,tag=vr.root]
+execute in minecraft:the_nether run kill @e[type=minecraft:marker,tag=vr.root]
+execute in minecraft:the_end run kill @e[type=minecraft:marker,tag=vr.root]
+execute in minecraft:overworld run kill @e[type=minecraft:block_display,tag=vr.display]
+execute in minecraft:the_nether run kill @e[type=minecraft:block_display,tag=vr.display]
+execute in minecraft:the_end run kill @e[type=minecraft:block_display,tag=vr.display]

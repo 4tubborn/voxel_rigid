@@ -1,0 +1,22 @@
+{
+  "values": [
+    "#minecraft:air",
+    "minecraft:water",
+    "minecraft:lava",
+    "minecraft:bubble_column",
+    "minecraft:bedrock",
+    "minecraft:barrier",
+    "minecraft:structure_void",
+    "minecraft:nether_portal",
+    "minecraft:end_portal",
+    "minecraft:end_gateway",
+    "minecraft:fire",
+    "minecraft:soul_fire",
+    "minecraft:piston_head",
+    "minecraft:moving_piston",
+    "minecraft:tall_grass",
+    "minecraft:large_fern",
+    "minecraft:tall_seagrass",
+    "minecraft:small_dripleaf"
+  ]
+}
