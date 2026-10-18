@@ -1,1 +1,0 @@
-tellraw @s [{text:"VR structures/tick="},{score:{name:"#ups",objective:"vr.cfg"}},{text:" substeps="},{score:{name:"#substeps",objective:"vr.cfg"}},{text:" solver iterations="},{score:{name:"#solver",objective:"vr.cfg"}},{text:" simulated ticks/activation="},{score:{name:"#step_ticks",objective:"vr.cfg"}}]

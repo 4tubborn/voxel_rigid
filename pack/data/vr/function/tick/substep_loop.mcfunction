@@ -1,5 +1,0 @@
-execute if score #subleft vr.tmp matches ..0 run return 0
-function vr:tick/substep
-execute if score #entity_enabled vr.cfg matches 1 as @e[type=minecraft:marker,tag=vr.root,tag=!vr.frozen] at @s run function vr:entity/body
-scoreboard players remove #subleft vr.tmp 1
-return run function vr:tick/substep_loop

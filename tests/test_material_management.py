@@ -5,7 +5,7 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-PACK = ROOT / 'pack'
+PACK = ROOT
 F = PACK / 'data/vr/function'
 P = PACK / 'data/vr/context_float_provider'
 scores = {}

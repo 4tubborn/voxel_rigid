@@ -2,8 +2,14 @@
 """Voxel Rigid 0.6: deterministic vanilla 26.3 pack compiler, Python 3.10+."""
 import json, math, pathlib, shutil, itertools, re
 ROOT=pathlib.Path(__file__).resolve().parents[1]
-PACK=ROOT/'pack'
-if PACK.exists(): shutil.rmtree(PACK)
+PACK=ROOT
+# Validate both exact targets before deleting anything. Refuse redirected
+# outputs (symlinks/junctions) rather than cleaning outside the project.
+for target in (ROOT/'data', ROOT/'pack.mcmeta'):
+ if target.resolve()!=target:
+  raise RuntimeError(f'Refusing to clean redirected output: {target}')
+if (ROOT/'data').exists(): shutil.rmtree(ROOT/'data')
+if (ROOT/'pack.mcmeta').exists(): (ROOT/'pack.mcmeta').unlink()
 F=PACK/'data/vr/function'; P=PACK/'data/vr/context_float_provider'
 AX='xyz'
 def write(p,s):

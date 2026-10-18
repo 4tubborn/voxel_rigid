@@ -27,6 +27,6 @@ execute as @e[type=minecraft:marker,tag=vr.root,sort=nearest,limit=1] run functi
 
 验证：生成器运行、宏边界静态检查、发射后 provider 数学测试（对角线超速、恰好达到阈值、密度上下限、弹性组合）通过。读取了本地 Bookshelf 压缩包的 getter 实现及 sounds 输出，未启动游戏执行新函数。仍需游戏内验证实际清理、世界/结构反弹、入水声音、双方碰撞声音及宏命令实例化。
 
-同时修复 score_backend 在 Windows 上以 `/shape/` 匹配反斜杠路径的问题，防止初始化退回 NBT 数值而没有初始化记分板。边界测试也包含碰撞修正后局部位置未归一化的情况。已安装版本的 conversion_disallowed 标签和 from_block 注释原本与生成源码不同，本次保留这些运行文件；pack/ 中仍沿用生成器原有内容。
+同时修复 score_backend 在 Windows 上以 `/shape/` 匹配反斜杠路径的问题，防止初始化退回 NBT 数值而没有初始化记分板。边界测试也包含碰撞修正后局部位置未归一化的情况。早期安装版本的 conversion_disallowed 标签和 from_block 注释曾与生成源码不同；当前构建直接清理并重建根目录的 `data/` 和 `pack.mcmeta`，以生成源码为准，不再保留这两处输出中的手工差异。
 
 接口参考：[Bookshelf block 文档](https://docs.mcbookshelf.dev/en/latest/modules/block/)。旧 README 与早期技术文档中固定默认密度、完整方块世界碰撞等描述不代表当前实现；本文件说明本次改动。

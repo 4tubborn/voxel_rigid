@@ -1,2 +1,0 @@
-$execute if score #entity_players vr.cfg matches 1 run tag @a[gamemode=!spectator,distance=..$(radius),limit=$(limit),sort=nearest] add vr.entity_candidate
-$execute if score #entity_tagged vr.cfg matches 1 run tag @e[tag=vr.collidable,type=!minecraft:marker,type=!minecraft:block_display,type=!minecraft:item_display,type=!minecraft:text_display,type=!minecraft:interaction,distance=..$(radius),limit=$(limit),sort=nearest] add vr.entity_candidate

@@ -1,2 +1,0 @@
-$execute positioned $(ox).0 $(oy).0 $(oz).0 run tp @e[type=minecraft:block_display,tag=vr.display,scores={vr.id=$(id),vr.voxel=6}] ~$(px) ~$(py) ~$(pz)
-$execute as @e[type=minecraft:block_display,tag=vr.display,scores={vr.id=$(id),vr.voxel=6}] run data merge entity @s {start_interpolation:0,transformation:{translation:[$(tx)f,$(ty)f,$(tz)f],left_rotation:[$(qx)f,$(qy)f,$(qz)f,$(qw)f],scale:[1.0f,1.0f,1.0f],right_rotation:[0.0f,0.0f,0.0f,1.0f]}}

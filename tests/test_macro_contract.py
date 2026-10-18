@@ -3,9 +3,7 @@
 from pathlib import Path
 import json,re
 root=Path(__file__).resolve().parents[1]
-f=root/'pack/data/vr/function'
-# Installed archive has data/ at root; build output has pack/data/.
-if not f.exists():f=root/'data/vr/function'
+f=root/'data/vr/function'
 schema=json.loads((root/'src/scoreboard_schema.json').read_text())
 registers=set(schema['registers'])
 functions={p.relative_to(f).as_posix()[:-11]:p.read_text().splitlines() for p in f.rglob('*.mcfunction')}
